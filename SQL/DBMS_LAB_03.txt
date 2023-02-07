@@ -58,7 +58,6 @@ SQL> insert into emp values(18,'Lance',42,8900,'sa','05-DEC-95','m');
 
 1 row created.
 
-
 SQL> select * from emp;
 
         ID NAME             AGE        SAL LOC       DOJ       STATU
