@@ -1,5 +1,4 @@
 SQL*Plus: Release 11.2.0.2.0 Production on Wed Feb 8 00:29:57 2023
-
 Copyright (c) 1982, 2014, Oracle.  All rights reserved.
 
 SQL> conn Abhi/Abhi;
@@ -58,6 +57,7 @@ SQL> insert into emp values(27,'Priti',31,2600,'ind','13-APR-97','u');
 SQL> insert into emp values(18,'Lance',42,8900,'sa','05-DEC-95','m');
 
 1 row created.
+
 
 SQL> select * from emp;
 
