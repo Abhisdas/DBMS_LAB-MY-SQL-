@@ -1,0 +1,131 @@
+
+SQL*Plus: Release 11.2.0.2.0 Production on Wed Feb 8 15:59:21 2023
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+SQL> conn Abhi/Abhi;
+Connected.
+SQL> create table student_21052300 (rollno number(5) constraint c1 primary key, sname varchar2(10) constraint c2 not null, address varchar2(10), age number(2) constraint c3 check(age>0 and age<25), regno number(5) constraint c4 unique, dob date constraint c5 check (dob > '01-jan-1989' and dob < '31-dec-2023'));
+
+Table created.
+
+
+SQL> insert into student_21052300 values(2,'Akash','Purnea',20,21342,'23-Jan-23');
+
+1 row created.
+
+SQL> insert into student_21052300 values(3,'Anil','Kolkata',22,21452,'22-feb-22');
+
+1 row created.
+
+SQL> insert into student_21052300 values(7,'Suyas','Bankok',19,22112,'04-Jan-02');
+
+1 row created.
+
+SQL> insert into student_21052300 values(1,'Avirup','Patna',19,22334,'14-Jan-05');
+
+1 row created.
+
+SQL> insert into student_21052300 values(4,'Niraj','Japan',18,21224,'16-Jan-03');
+
+1 row created.
+
+SQL> select * from student_21052300;
+
+    ROLLNO SNAME      ADDRESS           AGE      REGNO DOB
+---------- ---------- ---------- ---------- ---------- ---------
+         2 Akash      Purnea             20      21342 23-JAN-23
+         3 Anil       Kolkata            22      21452 22-FEB-22
+         7 Suyas      Bankok             19      22112 04-JAN-02
+         1 Avirup     Patna              19      22334 14-JAN-05
+         4 Niraj      Japan              18      21224 16-JAN-03
+
+SQL> insert into student_21052300 values(5,'Siraj','Usa',17,21624,'19-Jan-03');
+
+1 row created.
+
+SQL> select * from student_21052300;
+
+    ROLLNO SNAME      ADDRESS           AGE      REGNO DOB
+---------- ---------- ---------- ---------- ---------- ---------
+         2 Akash      Purnea             20      21342 23-JAN-23
+         3 Anil       Kolkata            22      21452 22-FEB-22
+         7 Suyas      Bankok             19      22112 04-JAN-02
+         1 Avirup     Patna              19      22334 14-JAN-05
+         4 Niraj      Japan              18      21224 16-JAN-03
+         5 Siraj      Usa                17      21624 19-JAN-03
+
+6 rows selected.
+
+SQL> insert into student_21052300 values(4,'Aman','Japan',18,21224,'16-Jan-03');
+insert into student_21052300 values(4,'Aman','Japan',18,21224,'16-Jan-03')
+*
+ERROR at line 1:
+ORA-00001: unique constraint (ABHI.C1) violated
+
+
+SQL> insert into student_21052300 values(9,'','Japan',18,21224,'16-Jan-03');
+insert into student_21052300 values(9,'','Japan',18,21224,'16-Jan-03')
+                                      *
+ERROR at line 1:
+ORA-01400: cannot insert NULL into ("ABHI"."STUDENT_21052300"."SNAME")
+
+
+SQL> insert into student_21052300 values(9,'','Japan',18,21224,'16-Jan-25');
+insert into student_21052300 values(9,'','Japan',18,21224,'16-Jan-25')
+                                      *
+ERROR at line 1:
+ORA-01400: cannot insert NULL into ("ABHI"."STUDENT_21052300"."SNAME")
+
+
+SQL> insert into student_21052300 values(9,'','Japan',100,21224,'16-Jan-25');
+insert into student_21052300 values(9,'','Japan',100,21224,'16-Jan-25')
+                                      *
+ERROR at line 1:
+ORA-01400: cannot insert NULL into ("ABHI"."STUDENT_21052300"."SNAME")
+
+
+SQL> insert into student_21052300 values(4,'Niraj','Japan',18,21229,'16-Jan-03');
+insert into student_21052300 values(4,'Niraj','Japan',18,21229,'16-Jan-03')
+*
+ERROR at line 1:
+ORA-00001: unique constraint (ABHI.C1) violated
+
+
+SQL> select * from student_21052300 order by ROLLNO;
+
+    ROLLNO SNAME      ADDRESS           AGE      REGNO DOB
+---------- ---------- ---------- ---------- ---------- ---------
+         1 Avirup     Patna              19      22334 14-JAN-05
+         2 Akash      Purnea             20      21342 23-JAN-23
+         3 Anil       Kolkata            22      21452 22-FEB-22
+         4 Niraj      Japan              18      21224 16-JAN-03
+         5 Siraj      Usa                17      21624 19-JAN-03
+         7 Suyas      Bankok             19      22112 04-JAN-02
+
+6 rows selected.
+
+SQL> select * from student_21052300 order by SNAME DESC;
+
+    ROLLNO SNAME      ADDRESS           AGE      REGNO DOB
+---------- ---------- ---------- ---------- ---------- ---------
+         7 Suyas      Bankok             19      22112 04-JAN-02
+         5 Siraj      Usa                17      21624 19-JAN-03
+         4 Niraj      Japan              18      21224 16-JAN-03
+         1 Avirup     Patna              19      22334 14-JAN-05
+         3 Anil       Kolkata            22      21452 22-FEB-22
+         2 Akash      Purnea             20      21342 23-JAN-23
+
+6 rows selected.
+
+SQL> select SNAME from student_21052300 where AGE>20;
+
+SNAME
+----------
+Anil
+
+SQL> commit;
+
+Commit complete.
+
+SQL>
