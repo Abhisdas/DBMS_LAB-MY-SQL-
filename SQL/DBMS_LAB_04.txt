@@ -57,40 +57,6 @@ SQL> select * from student_21052300;
 
 6 rows selected.
 
-SQL> insert into student_21052300 values(4,'Aman','Japan',18,21224,'16-Jan-03');
-insert into student_21052300 values(4,'Aman','Japan',18,21224,'16-Jan-03')
-*
-ERROR at line 1:
-ORA-00001: unique constraint (ABHI.C1) violated
-
-
-SQL> insert into student_21052300 values(9,'','Japan',18,21224,'16-Jan-03');
-insert into student_21052300 values(9,'','Japan',18,21224,'16-Jan-03')
-                                      *
-ERROR at line 1:
-ORA-01400: cannot insert NULL into ("ABHI"."STUDENT_21052300"."SNAME")
-
-
-SQL> insert into student_21052300 values(9,'','Japan',18,21224,'16-Jan-25');
-insert into student_21052300 values(9,'','Japan',18,21224,'16-Jan-25')
-                                      *
-ERROR at line 1:
-ORA-01400: cannot insert NULL into ("ABHI"."STUDENT_21052300"."SNAME")
-
-
-SQL> insert into student_21052300 values(9,'','Japan',100,21224,'16-Jan-25');
-insert into student_21052300 values(9,'','Japan',100,21224,'16-Jan-25')
-                                      *
-ERROR at line 1:
-ORA-01400: cannot insert NULL into ("ABHI"."STUDENT_21052300"."SNAME")
-
-
-SQL> insert into student_21052300 values(4,'Niraj','Japan',18,21229,'16-Jan-03');
-insert into student_21052300 values(4,'Niraj','Japan',18,21229,'16-Jan-03')
-*
-ERROR at line 1:
-ORA-00001: unique constraint (ABHI.C1) violated
-
 
 SQL> select * from student_21052300 order by ROLLNO;
 
