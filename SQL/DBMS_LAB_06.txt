@@ -1,0 +1,463 @@
+
+SQL*Plus: Release 11.2.0.2.0 Production on Wed Mar 1 16:05:08 2023
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+SQL> conn Abhi/Abhi;
+Connected.
+SQL> select abs(-5), abs(-5) from dual;
+
+   ABS(-5)    ABS(-5)
+---------- ----------
+         5          5
+
+SQL> select ceil(5.6) from dual;
+
+ CEIL(5.6)
+----------
+         6
+
+SQL> select floor(5.6) from dual;
+
+FLOOR(5.6)
+----------
+         5
+
+SQL> select exp(5) from dual;
+
+    EXP(5)
+----------
+148.413159
+
+SQL> select ln(2) from dual;
+
+     LN(2)
+----------
+.693147181
+
+SQL> select log(4,10) from dual;
+
+ LOG(4,10)
+----------
+1.66096405
+
+SQL> select mod(10,4) from dual;
+
+ MOD(10,4)
+----------
+         2
+
+SQL> select power(4,3) from dual;
+
+POWER(4,3)
+----------
+        64
+
+SQL> select sqrt(25) from dual;
+
+  SQRT(25)
+----------
+         5
+
+SQL> select round(15.193) from dual;
+
+ROUND(15.193)
+-------------
+           15
+
+SQL> select round(15.193,2) from dual;
+
+ROUND(15.193,2)
+---------------
+          15.19
+
+SQL> select round(15.197,2) from dual;
+
+ROUND(15.197,2)
+---------------
+           15.2
+
+SQL> select trunc(15.192,2) from dual;
+
+TRUNC(15.192,2)
+---------------
+          15.19
+
+SQL> select trunc(15.192) from dual;
+
+TRUNC(15.192)
+-------------
+           15
+
+SQL> select trunc(15.192,1) from dual;
+
+TRUNC(15.192,1)
+---------------
+           15.1
+
+SQL> select sign(3),sign(-5_ from dual;
+select sign(3),sign(-5_ from dual
+                      *
+ERROR at line 1:
+ORA-00911: invalid character
+
+
+SQL> select sign(3),sign(-5) from dual;
+
+   SIGN(3)   SIGN(-5)
+---------- ----------
+         1         -1
+
+SQL> select sign(60) from dual;
+
+  SIGN(60)
+----------
+         1
+
+SQL> select sin(60) from dual;
+
+   SIN(60)
+----------
+-.30481062
+
+SQL> select sin(30) from dual;
+
+   SIN(30)
+----------
+-.98803162
+
+SQL> select chr(70) from dual;
+
+C
+-
+F
+
+SQL> select concat('xyz','10') from dual;
+
+CONCA
+-----
+xyz10
+
+SQL> select lpad('oracle',10,'*') from dual;
+
+LPAD('ORAC
+----------
+****oracle
+
+SQL> select lpad('oracle',15,'*') from dual;
+
+LPAD('ORACLE',1
+---------------
+*********oracle
+
+SQL> select rpad('oracle',10,'*') from dual;
+
+RPAD('ORAC
+----------
+oracle****
+
+SQL> select rpad('oracle',10) from dual;
+
+RPAD('ORAC
+----------
+oracle
+
+SQL> select initcap('hello') from dual;
+
+INITC
+-----
+Hello
+
+SQL> select * from facultys;
+
+ FACULTYID NAME                ROOMID PHO     DEPTID
+---------- --------------- ---------- --- ----------
+       111 jones                   11 525          1
+       222 williams                20 533          2
+       123 mobley                  11 529          1
+       235 vajpayee                12 577          2
+       345 sen                     12 579          3
+       444 riveria                 21 544          4
+       555 chang                   17 587          5
+       333 collins                 17 599          3
+
+8 rows selected.
+
+SQL> select initcap(NAME) from facultys;
+
+INITCAP(NAME)
+---------------
+Jones
+Williams
+Mobley
+Vajpayee
+Sen
+Riveria
+Chang
+Collins
+
+8 rows selected.
+
+SQL> select lower('hello') from dual;
+
+LOWER
+-----
+hello
+
+SQL> select upper('hello') from dual;
+
+UPPER
+-----
+HELLO
+
+SQL> select replace ('oracle','rac','v') from dual;
+
+REPL
+----
+ovle
+
+SQL> select substr() from dual;
+select substr() from dual
+       *
+ERROR at line 1:
+ORA-00938: not enough arguments for function
+
+
+SQL> select substr('database',3,2) from dual;
+
+SU
+--
+ta
+
+SQL> select length('oracle') from dual;
+
+LENGTH('ORACLE')
+----------------
+               6
+
+SQL> select substr('database',3,4) from dual;
+
+SUBS
+----
+taba
+
+SQL> commit;
+
+Commit complete.
+
+SQL> create table emp (id number(2) , name varchar2(20) , e_sal number(5) , doj date);
+
+Table created.
+
+SQL> insert into emp values (13,'nick',4000,'23-feb-20');
+
+1 row created.
+
+SQL> insert into emp values (17,'null',7700,'25-nov-21');
+
+1 row created.
+
+SQL> insert into emp values (19,'neha',9800,'02-jan-23');
+
+1 row created.
+
+SQL> insert into emp values (5,'null',7700,'11-dec-19');
+
+1 row created.
+
+SQL> insert into emp values (7,'alysa',5900,'09-jun-20');
+
+1 row created.
+
+SQL> insert into emp values (11,'brick',4300,'18-apr-22');
+
+1 row created.
+
+SQL> insert into emp values (9,'galio',3700,'24-oct-23');
+
+1 row created.
+
+SQL> insert into emp values (18,'mario',6000,'19-may-21');
+
+1 row created.
+
+SQL> insert into emp values (10,'kris',8400,'29-mar-22');
+
+1 row created.
+
+SQL> insert into emp values (21,'jimmy',9800,'17-jan-20');
+
+1 row created.
+
+SQL> insert into emp values (24,'jones',null,'20-nov-21');
+
+1 row created.
+
+SQL> select * from emp;
+
+        ID NAME                      E_SAL DOJ
+---------- -------------------- ---------- ---------
+        13 nick                       4000 23-FEB-20
+        17 null                       7700 25-NOV-21
+        19 neha                       9800 02-JAN-23
+         5 null                       7700 11-DEC-19
+         7 alysa                      5900 09-JUN-20
+        11 brick                      4300 18-APR-22
+         9 galio                      3700 24-OCT-23
+        18 mario                      6000 19-MAY-21
+        10 kris                       8400 29-MAR-22
+        21 jimmy                      9800 17-JAN-20
+        24 jones                           20-NOV-21
+
+11 rows selected.
+
+SQL> select * from emp where DOJ = '24-OCT-23';
+
+        ID NAME                      E_SAL DOJ
+---------- -------------------- ---------- ---------
+         9 galio                      3700 24-OCT-23
+
+SQL> select ID , NAME from emp where E_SAL between 7000 and 8000;
+
+        ID NAME
+---------- --------------------
+        17 null
+         5 null
+
+SQL> select ID , NAME from emp where E_SAL between 7000 and 9000;
+
+        ID NAME
+---------- --------------------
+        17 null
+         5 null
+        10 kris
+
+SQL> select DOJ from emp where NAME = 'null';
+
+DOJ
+---------
+25-NOV-21
+11-DEC-19
+
+SQL> ALTER TABLE emp RENAME COLUMN E_SAL to sal;
+
+Table altered.
+
+SQL> select * from emp;
+
+        ID NAME                        SAL DOJ
+---------- -------------------- ---------- ---------
+        13 nick                       4000 23-FEB-20
+        17 null                       7700 25-NOV-21
+        19 neha                       9800 02-JAN-23
+         5 null                       7700 11-DEC-19
+         7 alysa                      5900 09-JUN-20
+        11 brick                      4300 18-APR-22
+         9 galio                      3700 24-OCT-23
+        18 mario                      6000 19-MAY-21
+        10 kris                       8400 29-MAR-22
+        21 jimmy                      9800 17-JAN-20
+        24 jones                           20-NOV-21
+
+11 rows selected.
+
+SQL> update emp set SAL = SAL + 1000 where ID >=17;
+
+5 rows updated.
+
+SQL> SELECT * from emp;
+
+        ID NAME                        SAL DOJ
+---------- -------------------- ---------- ---------
+        13 nick                       4000 23-FEB-20
+        17 null                       8700 25-NOV-21
+        19 neha                      10800 02-JAN-23
+         5 null                       7700 11-DEC-19
+         7 alysa                      5900 09-JUN-20
+        11 brick                      4300 18-APR-22
+         9 galio                      3700 24-OCT-23
+        18 mario                      7000 19-MAY-21
+        10 kris                       8400 29-MAR-22
+        21 jimmy                     10800 17-JAN-20
+        24 jones                           20-NOV-21
+
+11 rows selected.
+
+SQL> select ID , SAL from emp where name like '%i%' AND name like '%o%';
+
+        ID        SAL
+---------- ----------
+         9       3700
+        18       7000
+
+SQL> select DISTINCT SAL , NAME from emp;
+
+       SAL NAME
+---------- --------------------
+      3700 galio
+      7000 mario
+      8700 null
+     10800 neha
+      4300 brick
+           jones
+      7700 null
+      8400 kris
+     10800 jimmy
+      4000 nick
+      5900 alysa
+
+11 rows selected.
+
+SQL> select COUNT(DISTINCT SAL) from emp;
+
+COUNT(DISTINCTSAL)
+------------------
+                 9
+
+
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select sysdate from dual;
+
+SYSDATE
+---------
+01-MAR-23
+
+SQL> select add_months(DOJ,1) from emp where NAME='brick';
+
+ADD_MONTH
+---------
+18-MAY-22
+
+SQL> select * from emp;
+
+        ID NAME                        SAL DOJ
+---------- -------------------- ---------- ---------
+        13 nick                       4000 23-FEB-20
+        17 null                       8700 25-NOV-21
+        19 neha                      10800 02-JAN-23
+         5 null                       7700 11-DEC-19
+         7 alysa                      5900 09-JUN-20
+        11 brick                      4300 18-APR-22
+         9 galio                      3700 24-OCT-23
+        18 mario                      7000 19-MAY-21
+        10 kris                       8400 29-MAR-22
+        21 jimmy                     10800 17-JAN-20
+        24 jones                           20-NOV-21
+
+11 rows selected.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select add_months(sysdate,-3) from dual;
+
+ADD_MONTH
+---------
+01-DEC-22
+
+SQL>
