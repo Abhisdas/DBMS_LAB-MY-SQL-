@@ -1,0 +1,250 @@
+
+SQL*Plus: Release 11.2.0.2.0 Production on Wed Mar 29 16:10:58 2023
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+SQL> conn Abhi/Abhi;
+Connected.
+
+SQL> create table SALESMAN (salesman_id number(5),name varchar(10),city varchar(8),commission real);
+
+Table created.
+
+
+SQL> insert into SALESMAN values(5001,'James Hoog','NEW YORK',0.15);
+
+1 row created.
+
+SQL> insert into SALESMAN values(5002,'Nail Knite','Paris',0.13);
+
+1 row created.
+
+SQL> insert into SALESMAN values(5005,'Pit Alex','London',0.11);
+
+1 row created.
+
+SQL> insert into SALESMAN values(5006,'Mc Lyon','Paris',0.14);
+
+1 row created.
+
+SQL> insert into SALESMAN values(5007,'Paul Adam','Rome',0.13);
+
+1 row created.
+
+SQL> insert into SALESMAN values(5003,'Lauson Hen','San Jose',0.12);
+
+1 row created.
+
+SQL> select * from SALESMAN;
+
+SALESMAN_ID NAME       CITY     COMMISSION
+----------- ---------- -------- ----------
+       5001 James Hoog NEW YORK        .15
+       5002 Nail Knite Paris           .13
+       5005 Pit Alex   London          .11
+       5006 Mc Lyon    Paris           .14
+       5007 Paul Adam  Rome            .13
+       5003 Lauson Hen San Jose        .12
+
+6 rows selected.
+
+SQL> create table CUSTOMER(customer_id number(5),cust_name varchar(11),city varchar(10),grade number(5),salesman_id number(8));
+
+Table created.
+
+SQL> commit;
+
+Commit complete.
+
+
+SQL> insert into CUSTOMER values(3002,'Nick Rimand','New York',100,5001);
+
+1 row created.
+
+SQL> insert into CUSTOMER values(3007,'Brad Davis','New York',200,5001);
+
+1 row created.
+
+SQL> insert into CUSTOMER values(3005,'Graham Zusi','California',200,5002);
+
+1 row created.
+
+
+SQL> insert into CUSTOMER values(3008,'Julia Green','London',300,5002);
+
+1 row created.
+
+
+SQL> insert into CUSTOMER values(3004,'Fabia Johns','Paris',300,5006);
+
+1 row created.
+
+SQL> insert into CUSTOMER values(3004,'Geoff Camer','Berlin',100,5003);
+
+1 row created.
+
+SQL> insert into CUSTOMER values(3003,'Jozy Altido','Moscow',200,5007);
+
+1 row created.
+
+SQL> insert into CUSTOMER values(3001,'Brad Guzan','London',null,5005);
+
+1 row created.
+
+SQL> select * from CUSTOMER;
+
+CUSTOMER_ID CUST_NAME   CITY            GRADE SALESMAN_ID
+----------- ----------- ---------- ---------- -----------
+       3002 Nick Rimand New York          100        5001
+       3007 Brad Davis  New York          200        5001
+       3005 Graham Zusi California        200        5002
+       3008 Julia Green London            300        5002
+       3004 Fabia Johns Paris             300        5006
+       3004 Geoff Camer Berlin            100        5003
+       3003 Jozy Altido Moscow            200        5007
+       3001 Brad Guzan  London                       5005
+
+8 rows selected.
+
+SQL> SELECT * FROM CUSTOMER ORDER BY grade ASC, city DESC;
+
+CUSTOMER_ID CUST_NAME   CITY            GRADE SALESMAN_ID
+----------- ----------- ---------- ---------- -----------
+       3002 Nick Rimand New York          100        5001
+       3004 Geoff Camer Berlin            100        5003
+       3007 Brad Davis  New York          200        5001
+       3003 Jozy Altido Moscow            200        5007
+       3005 Graham Zusi California        200        5002
+       3004 Fabia Johns Paris             300        5006
+       3008 Julia Green London            300        5002
+       3001 Brad Guzan  London                       5005
+
+8 rows selected.
+
+SQL> COMMIT;
+
+Commit complete.
+
+
+SQL> SELECT name FROM SALESMAN WHERE name LIKE '%m%' OR name LIKE '%l%';
+
+NAME
+----------
+James Hoog
+Nail Knite
+Pit Alex
+Paul Adam
+
+SQL> SELECT * FROM CUSTOMER WHERE city <> 'London';
+
+CUSTOMER_ID CUST_NAME   CITY            GRADE SALESMAN_ID
+----------- ----------- ---------- ---------- -----------
+       3002 Nick Rimand New York          100        5001
+       3007 Brad Davis  New York          200        5001
+       3005 Graham Zusi California        200        5002
+       3004 Fabia Johns Paris             300        5006
+       3004 Geoff Camer Berlin            100        5003
+       3003 Jozy Altido Moscow            200        5007
+
+6 rows selected.
+
+SQL> SELECT grade, COUNT(*) FROM CUSTOMER GROUP BY grade;
+
+     GRADE   COUNT(*)
+---------- ----------
+       100          2
+                    1
+       300          2
+       200          3
+
+
+
+SQL> FROM SALESMAN s INNER JOIN CUSTOMER c ON s.city = c.city;
+SP2-0734: unknown command beginning "FROM SALES..." - rest of line ignored.
+SQL> SELECT s.name, c.cust_name, c.city FROM SALESMAN s INNER JOIN CUSTOMER c ON s.city = c.city;
+
+NAME       CUST_NAME   CITY
+---------- ----------- ----------
+Pit Alex   Julia Green London
+Mc Lyon    Fabia Johns Paris
+Nail Knite Fabia Johns Paris
+Pit Alex   Brad Guzan  London
+
+SQL> SELECT c.cust_name, c.city, s.name, s.commission FROM CUSTOMER c INNER JOIN SALESMAN s ON c.salesman_id = s.salesman_id;
+
+CUST_NAME   CITY       NAME       COMMISSION
+----------- ---------- ---------- ----------
+Nick Rimand New York   James Hoog        .15
+Brad Davis  New York   James Hoog        .15
+Graham Zusi California Nail Knite        .13
+Julia Green London     Nail Knite        .13
+Fabia Johns Paris      Mc Lyon           .14
+Geoff Camer Berlin     Lauson Hen        .12
+Jozy Altido Moscow     Paul Adam         .13
+Brad Guzan  London     Pit Alex          .11
+
+8 rows selected.
+
+SQL> SELECT cust_name, grade FROM CUSTOMER WHERE grade = (SELECT MAX(grade) FROM CUSTOMER);
+
+CUST_NAME        GRADE
+----------- ----------
+Julia Green        300
+Fabia Johns        300
+
+SQL> SELECT AVG(commission) AS mean_commission FROM SALESMAN;
+
+MEAN_COMMISSION
+---------------
+            .13
+
+SQL> SELECT c.cust_name, c.city, s.name, s.commission FROM CUSTOMER c INNER JOIN SALESMAN s ON c.salesman_id = s.salesman_id WHERE s.commission > 0.12;
+
+CUST_NAME   CITY       NAME       COMMISSION
+----------- ---------- ---------- ----------
+Nick Rimand New York   James Hoog        .15
+Brad Davis  New York   James Hoog        .15
+Graham Zusi California Nail Knite        .13
+Julia Green London     Nail Knite        .13
+Fabia Johns Paris      Mc Lyon           .14
+Jozy Altido Moscow     Paul Adam         .13
+
+6 rows selected.
+
+SQL> SELECT c.cust_name, c.city, c.grade, s.name, s.city AS city FROM CUSTOMER c INNER JOIN SALESMAN s ON c.salesman_id = s.salesman_id ORDER BY c.customer_id ASC;
+
+CUST_NAME   CITY            GRADE NAME       CITY
+----------- ---------- ---------- ---------- --------
+Brad Guzan  London                Pit Alex   London
+Nick Rimand New York          100 James Hoog NEW YORK
+Jozy Altido Moscow            200 Paul Adam  Rome
+Fabia Johns Paris             300 Mc Lyon    Paris
+Geoff Camer Berlin            100 Lauson Hen San Jose
+Graham Zusi California        200 Nail Knite Paris
+Brad Davis  New York          200 James Hoog NEW YORK
+Julia Green London            300 Nail Knite Paris
+
+8 rows selected.
+
+SQL> SELECT customer.cust_name, customer.city, customer.grade, salesman.name, salesman.city AS salesmancity FROM customer INNER JOIN salesman ON customer.salesman_id = salesman.salesman_id WHERE customer.grade < 300 ORDER BY customer.customer_id ASC;
+
+CUST_NAME   CITY            GRADE NAME       SALESMAN
+----------- ---------- ---------- ---------- --------
+Nick Rimand New York          100 James Hoog NEW YORK
+Jozy Altido Moscow            200 Paul Adam  Rome
+Geoff Camer Berlin            100 Lauson Hen San Jose
+Graham Zusi California        200 Nail Knite Paris
+Brad Davis  New York          200 James Hoog NEW YORK
+
+
+SQL> commit;
+
+Commit complete.
+
+
+SQL> ALTER TABLE CUSTOMER ADD email_id VARCHAR(20) NULL;
+
+Table altered.
+
+
+SQL>
