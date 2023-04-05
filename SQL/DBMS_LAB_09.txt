@@ -1,0 +1,121 @@
+
+SQL*Plus: Release 11.2.0.2.0 Production on Wed Apr 5 20:17:59 2023
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+SQL> conn Abhi/Abhi;
+Connected.
+SQL> select * from SUPPLIER;
+
+       SID SNAME LOCAT
+---------- ----- -----
+       100 ss    ab
+       101 sb    ac
+       102 sc    ad
+       103 sd    ae
+       104 se    af
+
+SQL> select * from PART;
+
+       PID PNAME COLOR
+---------- ----- ---------
+       200 pa    red
+       201 pb    blue
+       202 pc    green
+       203 pd    yellow
+       204 pd    orange
+
+SQL> select * from CATA;
+
+       SID        PID       COST
+---------- ---------- ----------
+       100        200         10
+       101        201         20
+       102        202         30
+       103        203         40
+       104        204         50
+       105        205         60
+       106        206         70
+       107        207         80
+       108        208         90
+       109        209        100
+       110        210        110
+
+       SID        PID       COST
+---------- ---------- ----------
+       111        211        120
+       112        212        130
+       113        213        140
+       114        214        150
+
+15 rows selected.
+
+SQL> SELECT SID FROM SUPPLIER WHERE SID IN (SELECT SID FROM PART WHERE COLOR = 'red');
+
+       SID
+----------
+       100
+       101
+       102
+       103
+       104
+
+SQL> SELECT SID, LOCATION FROM SUPPLIER WHERE SID IN (SELECT SID FROM PART WHERE COLOR = 'green' GROUP BY SID HAVING COUNT(DISTINCT PID) = (SELECT COUNT(DISTINCT PID) FROM PART WHERE COLOR = 'green'));
+
+       SID LOCAT
+---------- -----
+       100 ab
+       101 ac
+       102 ad
+       103 ae
+       104 af
+
+SQL> SELECT SID, LOCATION FROM SUPPLIER WHERE SID IN (SELECT SID FROM PART WHERE COLOR = 'green' GROUP BY SID HAVING COUNT(DISTINCT PID) = (SELECT COUNT(DISTINCT PID) FROM PART WHERE COLOR = 'green'));
+
+       SID LOCAT
+---------- -----
+       100 ab
+       101 ac
+       102 ad
+       103 ae
+       104 af
+
+SQL> SELECT DISTINCT SID FROM SUPPLIER WHERE SID IN (SELECT SID FROM PART WHERE COLOR IN ('red', 'blue'));
+
+       SID
+----------
+       100
+       102
+       101
+       104
+       103
+
+SQL> SELECT * FROM SUPPLIER WHERE SID IN (SELECT SID FROM PART WHERE COLOR IN ('yellow', 'green') GROUP BY SID HAVING COUNT(DISTINCT COLOR) = 2);
+
+       SID SNAME LOCAT
+---------- ----- -----
+       100 ss    ab
+       101 sb    ac
+       102 sc    ad
+       103 sd    ae
+       104 se    af
+
+
+SQL> SELECT SID FROM SUPPLIER WHERE LOCATION = 'BBSR' AND SID IN (SELECT SID FROM PART WHERE COLOR = 'green');
+
+no rows selected
+
+SQL> SELECT * FROM SUPPLIER WHERE SID IN (SELECT SID FROM PART WHERE COLOR = 'red' GROUP BY SID HAVING COUNT(DISTINCT COLOR) = 1);
+
+       SID SNAME LOCAT
+---------- ----- -----
+       100 ss    ab
+       101 sb    ac
+       102 sc    ad
+       103 sd    ae
+       104 se    af
+
+SQL> SELECT * FROM SUPPLIER WHERE SID NOT IN (SELECT SID FROM PART WHERE COLOR = 'green');
+
+no rows selected
+
