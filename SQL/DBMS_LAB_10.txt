@@ -1,0 +1,152 @@
+QSN.1)->>write a plsql program to display and save your biodata.
+
+
+DECLARE
+ 
+  name VARCHAR2(50) := 'Abhishek Das';
+  age NUMBER := 20;
+  gender VARCHAR2(10) := 'Male';
+  address VARCHAR2(100) := 'NEAR CHOWK, FORBESGANJ, INDIA';
+  email VARCHAR2(50) := 'dashabhish@gmail.com';
+  phone VARCHAR2(20) := '555-555-1212';
+BEGIN
+
+  DBMS_OUTPUT.PUT_LINE('Name: ' || name);
+  DBMS_OUTPUT.PUT_LINE('Age: ' || age);
+  DBMS_OUTPUT.PUT_LINE('Gender: ' || gender);
+  DBMS_OUTPUT.PUT_LINE('Address: ' || address);
+  DBMS_OUTPUT.PUT_LINE('Email: ' || email);
+  DBMS_OUTPUT.PUT_LINE('Phone: ' || phone);
+  
+
+  INSERT INTO biodata (name, age, gender, address, email, phone)
+  VALUES (name, age, gender, address, email, phone);
+  
+
+  COMMIT;
+END;
+
+
+
+
+
+
+QSN.2)->>write a plsql program to find whether the number is even or odd.
+
+
+DECLARE
+
+  number_to_check NUMBER := 25;
+BEGIN
+  
+  IF MOD(number_to_check, 2) = 0 THEN
+    DBMS_OUTPUT.PUT_LINE('The number ' || number_to_check || ' is even.');
+  ELSE
+    DBMS_OUTPUT.PUT_LINE('The number ' || number_to_check || ' is odd.');
+  END IF;
+END;
+
+
+
+
+
+
+QSN.3)->>write a plsql program to verify the scope of a variable(nested and begin).
+
+DECLARE
+
+  outer_variable VARCHAR2(50) := 'Outer variable';
+BEGIN
+ 
+  DBMS_OUTPUT.PUT_LINE('Outer variable: ' || outer_variable);
+  
+ 
+  BEGIN
+    
+    inner_variable VARCHAR2(50) := 'Inner variable';
+    
+    
+    DBMS_OUTPUT.PUT_LINE('Inner variable: ' || inner_variable);
+    
+    
+    DBMS_OUTPUT.PUT_LINE('Outer variable (from inner block): ' || outer_variable);
+  END;
+  
+  
+  DBMS_OUTPUT.PUT_LINE('Outer variable (after inner block): ' || outer_variable);
+  
+END;
+
+
+
+
+
+
+
+QSN.4)->>write a plsql program to add two numbers and display the value.
+
+
+DECLARE
+  
+  num1 NUMBER := 10;
+  num2 NUMBER := 20;
+  
+  
+  sum NUMBER;
+BEGIN
+  
+  sum := num1 + num2;
+  
+  
+  DBMS_OUTPUT.PUT_LINE('The sum of ' || num1 || ' and ' || num2 || ' is ' || sum);
+END;
+
+
+
+
+
+
+
+QSN.5)->>write a plsql program to display the name of the weekday if the number is entered.
+
+
+DECLARE
+
+  input_num NUMBER := 3;
+  
+
+  weekdays CONSTANT VARCHAR2(7) := 'Sunday Monday Tuesday Wednesday Thursday Friday Saturday';
+  
+ 
+  start_pos NUMBER := (input_num - 1) * 9 + 1;
+  end_pos NUMBER := start_pos + 8;
+BEGIN
+ 
+  DBMS_OUTPUT.PUT_LINE('The name of the weekday for ' || input_num || ' is: ' || SUBSTR(weekdays, start_pos, 9));
+END;
+
+
+
+
+
+
+
+
+QSN.6)->>write a plsql program to find if a number is palindrome or not.
+
+
+DECLARE
+ 
+  input_num NUMBER := 3; 
+  
+ 
+  weekdays CONSTANT VARCHAR2(7) := 'Sunday Monday Tuesday Wednesday Thursday Friday Saturday';
+  
+  
+  start_pos NUMBER := (input_num - 1) * 9 + 1;
+  end_pos NUMBER := start_pos + 8;
+BEGIN
+  
+  DBMS_OUTPUT.PUT_LINE('The name of the weekday for ' || input_num || ' is: ' || SUBSTR(weekdays, start_pos, 9));
+END;
+
