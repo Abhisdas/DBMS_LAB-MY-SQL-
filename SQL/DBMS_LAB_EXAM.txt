@@ -1,0 +1,182 @@
+Q1.) WRITE A PL/SQL PROGRAM TO FIND THE NUMBER IS PERFECT OR NOT(ex:6 is perfect number).
+
+DECLARE
+  num INTEGER := &input_number;
+  divisor INTEGER;
+  sum_of_divisors INTEGER := 0;
+BEGIN
+  -- Find the divisors of the number and calculate their sum
+  FOR divisor IN 1..(num/2) LOOP
+    IF (num MOD divisor = 0) THEN
+      sum_of_divisors := sum_of_divisors + divisor;
+    END IF;
+  END LOOP;
+
+  -- Check if the sum of divisors equals the original number
+  IF (sum_of_divisors = num) THEN
+    DBMS_OUTPUT.PUT_LINE(num || ' is a perfect number.');
+  ELSE
+    DBMS_OUTPUT.PUT_LINE(num || ' is not a perfect number.');
+  END IF;
+END;
+
+
+
+
+
+
+Q2.) write a pl/sql to find the smallest among 2 number.
+
+
+ DECLARE
+       num1 INTEGER := 10;
+       num2 INTEGER := 5;
+       smallest INTEGER;
+    BEGIN
+       IF num1 < num2 THEN
+          smallest := num1;
+       ELSE
+          smallest := num2;
+    END IF;
+     DBMS_OUTPUT.PUT_LINE('The smallest number is ' || smallest);
+   END;
+
+
+
+
+
+
+
+   <<<<<<<<<-------------Tables To BE Made--------------->>>>>>>>>>>>>>
+
+
+
+
+
+
+
+create table Faculty(id varchar2(15),salary number(8),Dept varchar2(15),Teaching_load number(5),Location varchar2(15));
+
+
+insert into Faculty values('A-03',24000,'IT',14,'Bbsr');
+insert into Faculty values('B-12',22000,'IT',16,'Bbsr');
+insert into Faculty values('A-09',27000,'ELEC',11,'Lucknow');
+insert into Faculty values('C-16',30000,'IT',13,'Puri');
+insert into Faculty values('D-11',26000,'CSE',14,'Delhi');
+insert into Faculty values('E-45',28000,'BIO',17,'Kolkata');
+insert into Faculty values('A-10',24000,'BIO',18,'Kolkata');
+insert into Faculty values('E-55',32000,'CSE',20,'Bbsr');
+
+
+
+
+
+create table EMP2(E_Id number(5),E_Sal number(7),E_Dept varchar2(15));
+
+
+insert into EMP2 values(222,5500,'Cons');
+insert into EMP2 values(134,4500,'Cons');
+insert into EMP2 values(338,7700,'Fin');
+insert into EMP2 values(279,1700,'Tech');
+insert into EMP2 values(178,2400,'Cons');
+insert into EMP2 values(296,9800,'Cons');
+insert into EMP2 values(120,3000,'Tech');
+insert into EMP2 values(267,3400,'Hr');
+
+
+
+
+create table EMP1(E_id number(5),E_sal number(6),E_dept varchar2(10));
+
+
+insert into EMP1 values(120,3000,'tech');
+insert into EMP1 values(134,4500,'cons');
+insert into EMP1 values(156,5500,'hr');
+insert into EMP1 values(213,6500,'fin');
+insert into EMP1 values(348,2500,'tech');
+insert into EMP1 values(119,4000,'hr');
+insert into EMP1 values(451,8700,'fin');
+insert into EMP1 values(279,1700,'tech');
+
+
+
+
+create table STUDENT1(Roll number(5), Name varchar2(10), Age number(2), CGPA number(5,3), phone number(10), Dept varchar2(8));
+
+
+
+insert into STUDENT1 values(1234,'Rahul',24,8.56,7895600050,'CSE');
+insert into STUDENT1 values(2367,'Preeti',22,9.04,7895170050,'IT');
+insert into STUDENT1 values(5423,'JAswinder',27,0.55,7895679050,'ELEC');
+insert into STUDENT1 values(3378,'Prayag',null,7.89,7835600050,'CSE');
+insert into STUDENT1 values(7844,'Nicolas',26,9.24,7895194650,'CSE');
+insert into STUDENT1 values(1784,'Stephen',28,8.56,7895600770,'CIVIL');
+insert into STUDENT1 values(3092,'Raghav',24,9.12,7895611050,'BIO');
+insert into STUDENT1 values(4031,'Jasmin',23,7.35,7895602350,'CSE');
+
+
+
+
+create table COURSE(id varchar2(7),c_name varchar2(6),credit number(2),"c/e" varchar2(5),fac_assign varchar2(12));
+
+
+insert into COURSE values('cs-230','os',3,'c','y');
+insert into COURSE values('cs-127','dbms',4,'c','y');
+insert into COURSE values('cs-876','cn',2,'e','n');
+insert into COURSE values('it-446','dsa',2,'e','y');
+insert into COURSE values('it-189','cd',3,'e',null);
+insert into COURSE values('cs-773','coa',4,null,'n');
+insert into COURSE values('it-378','se',2,'c','y');
+
+
+
+
+CREATE TABLE STUDENT (SID NUMBER(8),SNAME VARCHAR2(10),SGENDER VARCHAR2(10),SAGE NUMBER(8),SCITY VARCHAR2(10));
+
+
+INSERT INTO STUDENT (SID, SNAME, SGENDER, SAGE, SCITY) VALUES (1001, 'ATUL', 'MALE', 22, 'NEWDELHI');
+INSERT INTO STUDENT (SID, SNAME, SGENDER, SAGE, SCITY) VALUES (1002, 'ABHI', 'MALE', 21, 'KOLKATA');
+INSERT INTO STUDENT (SID, SNAME, SGENDER, SAGE, SCITY) VALUES (1003, 'SAINA', 'FEMALE', 32, 'KOLKATA');
+INSERT INTO STUDENT (SID, SNAME, SGENDER, SAGE, SCITY) VALUES (1004, 'NITU', 'FEMALE', 24, 'VIZAG');
+INSERT INTO STUDENT (SID, SNAME, SGENDER, SAGE, SCITY) VALUES (1005, 'ASIS', 'MALE', 36, 'BBSR');
+
+
+
+
+CREATE TABLE EmployeeSalary (Empid NUMBER(10),project VARCHAR2(14),salary NUMBER(12),employeetype VARCHAR2(14));
+
+
+INSERT INTO EmployeeSalary (EmpId, Project, Salary, employeetype) VALUES (121, 'P1', 25000, 'worker');
+INSERT INTO EmployeeSalary (EmpId, Project, Salary, employeetype) VALUES (321, 'P2', 50000, 'manager');
+INSERT INTO EmployeeSalary (EmpId, Project, Salary, employeetype) VALUES (421, 'P1', 30000, 'foreman');
+INSERT INTO EmployeeSalary (EmpId, Project, Salary, employeetype) VALUES (621, 'P3', 24000, 'electrician');
+
+
+
+
+
+CREATE TABLE Employee1 (EmpId NUMBER(10),FullName VARCHAR2(17),MailId VARCHAR2(18),DateOfJoining DATE,City VARCHAR2(18));
+
+
+
+INSERT INTO Employee1 (EmpId, FullName, MailId, DateOfJoining, City) VALUES (121, 'John Snow','js@gmail.com',TO_DATE('01/31/2019','MM/DD/YYYY'), 'Toronto');
+INSERT INTO Employee1 (EmpId, FullName, MailId, DateOfJoining, City) VALUES (321, 'Walter White','wh@yahoo.com',TO_DATE('01/30/2020','MM/DD/YYYY'), 'California');
+INSERT INTO Employee1 (EmpId, FullName, MailId, DateOfJoining, City) VALUES (421, 'Kuldeep Rana', 'kr@hotmail.com', TO_DATE('27/11/2021','DD/MM/YYYY'), 'New Delhi');
+INSERT INTO Employee1 (EmpId, FullName, MailId, DateOfJoining, City) VALUES (621, 'Randeep Singh', 'rs@gmail.com', NULL, NULL);
+
+
+
+
+
+
+CREATE TABLE FACULTY1 (FID NUMBER(5),FNAME VARCHAR2(10),FGENDER VARCHAR2(10),FAGE NUMBER(5),FCITY VARCHAR2(18));
+
+
+INSERT INTO FACULTY1 (FID, FNAME, FGENDER, FAGE, FCITY) VALUES (1001, 'AVIRUP', 'MALE', 22, 'NEWDELHI');
+INSERT INTO FACULTY1 (FID, FNAME, FGENDER, FAGE, FCITY) VALUES (1002, 'AKHIL', 'MALE', 21, 'KOLKATA');
+INSERT INTO FACULTY1 (FID, FNAME, FGENDER, FAGE, FCITY) VALUES (1003, 'SONA', 'FEMALE', 32, 'HYDERABAD');
+INSERT INTO FACULTY1 (FID, FNAME, FGENDER, FAGE, FCITY) VALUES (1004, 'TUTU', 'FEMALE', 24, 'CTC');
+INSERT INTO FACULTY1 (FID, FNAME, FGENDER, FAGE, FCITY) VALUES (1005, 'RABI', 'MALE', 36, 'BBSR');
+
+
+
